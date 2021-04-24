@@ -1,0 +1,33 @@
+version: '3.7'
+
+volumes:
+  local_mongo_data: {}
+  local_mongo_data_backups: {}
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: ./compose/local/fastapi/Dockerfile
+    image: app_backend_local_fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    env_file:
+      - ./.envs/.local/.fastapi
+      - ./.envs/.local/.mongodb
+    volumes:
+      - .:/usr/src/app
+
+
+  mongodb:
+    image: mongo
+    env_file:
+      - ./.envs/.local/.mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker-entrypoint-initdb.d/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    restart: unless-stopped

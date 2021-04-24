@@ -1,0 +1,24 @@
+db.createUser({
+    user: 'debug',
+    pwd: 'debug',
+    roles: [
+        {
+            role: 'readWrite',
+            db: 'user_store',
+        },
+    ],
+});
+
+db = new Mongo().getDB("user_store");
+
+db.createCollection('users', { capped: false });
+db.createCollection('locations', { capped: false });
+db.createCollection('test', { capped: false });
+
+db.test.insert([
+    { "item": 1 },
+    { "item": 2 },
+    { "item": 3 },
+    { "item": 4 },
+    { "item": 5 }
+]);

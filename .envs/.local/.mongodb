@@ -1,0 +1,6 @@
+MONGO_COLLECTION_LOCATIONS=locations
+MONGO_COLLECTION_USERS=users
+MONGO_INITDB_ROOT_USERNAME=debug
+MONGO_INITDB_ROOT_PASSWORD=debug
+MONGO_INITDB_DATABASE=user_store
+MONGO_URI=mongodb://debug:debug@mongodb:27017/user_store?retryWrites=true&w=majority
